@@ -1,0 +1,40 @@
+ 
+## arg 1:  the new package version
+pre_install() {
+    return 0
+}
+ 
+## arg 1:  the new package version
+post_install() {
+    if [ -e /usr/bin/kdm ] ; then
+        cp /usr/share/xsessions/icon-DE.desktop /usr/share/apps/kdm/sessions/
+    fi
+    echo "Please run the command \"icon_de_init\" with sudo user"
+}
+ 
+## arg 1:  the new package version
+## arg 2:  the old package version
+pre_upgrade() {
+    return 0
+}
+ 
+## arg 1:  the new package version
+## arg 2:  the old package version
+post_upgrade() {
+    if [ -e /usr/bin/kdm ] ; then
+        cp /usr/share/xsessions/icon-DE.desktop /usr/share/apps/kdm/sessions/
+    fi
+    echo "Please run the command \"icon_de_init\" with sudo user"
+}
+ 
+## arg 1:  the old package version
+pre_remove() {
+    return 0
+}
+ 
+## arg 1:  the old package version
+post_remove() {
+  if [ -e  /usr/share/apps/kdm/sessions/icon-DE.desktop ]; then
+    rm -rf /usr/share/apps/kdm/sessions/icon-DE.desktop
+  fi
+}
